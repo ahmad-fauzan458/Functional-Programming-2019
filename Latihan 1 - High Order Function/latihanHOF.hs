@@ -98,6 +98,7 @@ questionOne xs = map (+1) xs
 
 questionTwo [] _ = []
 questionTwo (x:xs) ys = (map (+x) ys) ++ (questionTwo xs ys)
+questionTwo' xs ys = concat (map (\x -> map (\y -> x+y) ys) xs)
 
 questionThree xs = map (+2) (filter (\x -> x > 3) xs)
 
