@@ -62,3 +62,16 @@ mystery xs = foldr (++) [] (map sing xs)
 -- Pada id . f, Bool -> Bool
 -- Pada f . id, Int -> Int
 -- Pada id f, (Int -> Bool) -> (Int -> Bool)
+
+-- Define a function composeList which composes a list of functions into a single
+-- function. You should give the type of composeList, and explain why the function
+-- has this type. What is the effect of your function on an empty list of functions?
+
+composeList :: [(a -> a)] -> (a -> a)
+-- composeList memiliki type ini karena memiliki parameter list of function dan akan menghasilkan single function
+-- (a -> a) merupakan sebuah fungsi yang menerima a dan menghasilkan a
+-- seperti itu karena untuk bisa melakukan komposisi, misal pada x . y, maka tipe parameter yang diterima x harus sama dengan 
+-- tipe output dari fungsi y
+composeList [] = id
+composeList (x:xs) = x . composeList xs 
+-- pada sebuah empty list, maka fungsi composeList yang saya buat akan menghasilkan fungsi id, hal itu digunakan sebagai base case
