@@ -108,3 +108,12 @@ questionFour xys = map (\(x,y) -> x+3) xys
 questionFive xys = map (\(x,y) -> x+4) (filter (\(x,y) -> x+y < 5) xys) 
 
 questionSix mxs = map (\(Just x) -> x+5) mxs
+
+-- Can you it the other way around? I.e. rewrite the following expressions as list
+-- comprehensions.
+-- 1. map (+3) xs
+-- 2. filter (>7) xs
+-- 3. concat (map (\x -> map (\y -> (x,y)) ys) xs)
+-- 4. filter (>3) (map (\(x,y) -> x+y) xys)
+
+questionOne' xs = [x+3 | x <- xs]
