@@ -16,3 +16,14 @@ addByTwo xs = map (+1) (map (+1) xs)
 iter :: (Integral a) => a -> (b -> b) -> b -> b
 iter 0 _ x = x
 iter n f x = f $ iter (n-1) f x
+
+-- What is the type and effect of the following function?
+-- • \n -> iter n succ
+-- succ is the successor function, which increases a value by one:
+-- Prelude> succ 33
+-- 34
+-- 
+-- Tipenya adalah (Integral a, Num b, Enum b) => a -> (b -> b) -> b -> b
+-- Tipe dari hasilnya adalah (Num b, Enum b) => b
+-- Efeknya adalah, iter n succ m akan melakukan fungsi succ m sebanyak n kali
+-- Misal iter 5 succ 10 akan menghasilkan 15
