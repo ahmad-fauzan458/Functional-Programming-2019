@@ -102,3 +102,5 @@ questionTwo [] _ = []
 questionTwo (x:xs) ys = (map (+x) ys) ++ (questionTwo xs ys)
 
 questionThree xs = map (+2) (filter (\x -> x > 3) xs)
+
+questionFour xys = map (\(x,y) -> x+3) xys
