@@ -75,3 +75,12 @@ composeList :: [(a -> a)] -> (a -> a)
 composeList [] = id
 composeList (x:xs) = x . composeList xs 
 -- pada sebuah empty list, maka fungsi composeList yang saya buat akan menghasilkan fungsi id, hal itu digunakan sebagai base case
+
+-- (*) Define the function flip :: (a -> b -> c) -> (b -> a -> c)
+-- which reverses the order in which its function argument takes its arguments.
+-- The following example shows the effect of flip:
+-- Prelude> flip div 3 100
+-- 33
+
+flip' :: (a -> b -> c) -> (b -> a -> c)
+flip' f = (\x y -> f y x)
