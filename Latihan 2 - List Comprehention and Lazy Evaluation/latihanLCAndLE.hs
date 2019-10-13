@@ -30,3 +30,7 @@ permutation xs = [ x:ps | x <- xs, ps <- permutation(xs\\[x])]
 primes n = sieve [2,3..n]
     where sieve (x:xs) = x : sieve [ y | y <- xs, y `mod` x /= 0]
           sieve [] = []
+
+-- 6. Buatlah definisi infinite list dari triple pythagoras. List tersebut terdiri dari element
+-- triple bilangan bulat positif yang mengikut persamaan pythagoras x^2 + y^2 = z^2
+pythaTriple = [(x,y,z) | z <- [5,6..], x <- [z,z-1..4], y <- [x,x-1..3], z^2 == x^2 + y^2]
