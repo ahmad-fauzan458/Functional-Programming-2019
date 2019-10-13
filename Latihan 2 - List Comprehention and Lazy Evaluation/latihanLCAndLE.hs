@@ -7,3 +7,10 @@
 -- Terakhir, kita buat list x+y dari kombinasi-kombinasi yang memenuhi kondisi x > y
 -- Sehingga hasil akhirnya adalah
 nomorSatu = [5, 6, 7]
+
+-- 2. Buatlah fungsi divisor yang menerima sebuah bilangan bulat n dan mengembalikan
+-- list bilangan bulat positif yang membagi habis n, Contoh:
+-- LatihanLazy> divisor 12
+-- [1,2,3,4,6,12]
+divisor :: (Integral n) => n -> [n]
+divisor n = [x | x <-[1,2..n],  n `mod` x == 0]
