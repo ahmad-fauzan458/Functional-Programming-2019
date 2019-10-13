@@ -14,3 +14,7 @@ nomorSatu = [5, 6, 7]
 -- [1,2,3,4,6,12]
 divisor :: (Integral n) => n -> [n]
 divisor n = [x | x <-[1,2..n],  n `mod` x == 0]
+
+-- Buatlah definisi quick sort menggunakan list comprehension
+quicksort [] = []
+quicksort (x:xs) = quicksort([y | y <- xs, y <= x]) ++ [x] ++ quicksort([z | z <- xs, z > x])
