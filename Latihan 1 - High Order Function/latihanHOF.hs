@@ -84,3 +84,16 @@ composeList (x:xs) = x . composeList xs
 
 flip' :: (a -> b -> c) -> (b -> a -> c)
 flip' f = (\x y -> f y x)
+
+-- 2 (*). List Comprehensions and Higher-Order Functions
+
+-- Can you rewrite the following list comprehensions using the higher-order
+-- functions map and filter? You might need the function concat too.
+-- 1. [ x+1 | x <- xs ]
+-- 2. [ x+y | x <- xs, y <-ys ]
+-- 3. [ x+2 | x <- xs, x > 3 ]
+-- 4. [ x+3 | (x,_) <- xys ]
+-- 5. [ x+4 | (x,y) <- xys, x+y < 5 ]
+-- 6. [ x+5 | Just x <- mxs ]
+
+questionOne xs = map (+1) xs 
