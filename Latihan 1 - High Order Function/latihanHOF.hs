@@ -97,3 +97,6 @@ flip' f = (\x y -> f y x)
 -- 6. [ x+5 | Just x <- mxs ]
 
 questionOne xs = map (+1) xs 
+
+questionTwo [] _ = []
+questionTwo (x:xs) ys = (map (+x) ys) ++ (questionTwo xs ys)
