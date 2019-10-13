@@ -121,3 +121,5 @@ questionOne' xs = [x+3 | x <- xs]
 questionTwo' xs = [x | x <- xs, x > 7]
 
 questionThree' xs ys = [(x,y) | x<-xs, y<-ys]
+
+questionFour' xys = [ x+y | (x,y) <- xys, x+y > 3]
