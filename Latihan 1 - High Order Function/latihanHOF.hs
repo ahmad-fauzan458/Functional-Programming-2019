@@ -119,3 +119,5 @@ questionSix mxs = map (\(Just x) -> x+5) mxs
 questionOne' xs = [x+3 | x <- xs]
 
 questionTwo' xs = [x | x <- xs, x > 7]
+
+questionThree' xs ys = [(x,y) | x<-xs, y<-ys]
