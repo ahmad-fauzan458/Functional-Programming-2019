@@ -48,3 +48,17 @@ mystery xs = foldr (++) [] (map sing xs)
 -- [3] ++ [] = [3]
 -- [2] ++ [3] = [2,3]
 -- [1] ++ [2,3] = [1,2,3]
+
+-- (*) If id is the polymorphic identity function, defined by id x = x, explain the
+-- behavior of the expressions
+--
+-- id . f = f, karena mengaplikasikan id ke hasil dari f tidak mengubah apa apa
+-- f . id = f, karena pemrosesan argument f oleh id tidak mengubah nilai dari argument tersebut
+-- id f = f, karena mengaplikasikan id ke sesuatu tidak mengubah sesuatu tersebut
+--
+-- If f is of type Int -> Bool, at what instance of its most general type a ->
+-- a is id used in each case?
+--
+-- Pada id . f, Bool -> Bool
+-- Pada f . id, Int -> Int
+-- Pada id f, (Int -> Bool) -> (Int -> Bool)
