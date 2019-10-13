@@ -117,3 +117,5 @@ questionSix mxs = map (\(Just x) -> x+5) mxs
 -- 4. filter (>3) (map (\(x,y) -> x+y) xys)
 
 questionOne' xs = [x+3 | x <- xs]
+
+questionTwo' xs = [x | x <- xs, x > 7]
