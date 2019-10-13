@@ -31,3 +31,20 @@ iter n f x = f $ iter (n-1) f x
 -- (*) How would you define the sum of the squares of the natural numbers 1
 -- to n using map and foldr?
 sumSquares n = foldr (\x acc -> acc + x^2) 0 [1..n]
+
+-- How does the function
+mystery xs = foldr (++) [] (map sing xs)
+    where sing x = [x]
+-- behave?
+-- Fungsi tersebut bertindak seperti fungsi identitas
+-- Contoh : mystery [1,2,3] = [1,2,3]
+-- Jika kita perhatikan, map sing xs memetakan sebuah list of e menjadi list of (list of e)
+-- Misal map sing [1,2,3] = [[1], [2], [3]]
+-- Kemudian untuk setiap x elemen map sing xs akan dikonkat dengan acc
+-- dimana acc adalah hasil dari operasi konkat x sebelumnya dengan acc sebelumnya
+
+-- acc pertama (sebelum ada pengambilan x) adalah []
+-- pengambilan x dimulai dari elemen paling kanan
+-- [3] ++ [] = [3]
+-- [2] ++ [3] = [2,3]
+-- [1] ++ [2,3] = [1,2,3]
