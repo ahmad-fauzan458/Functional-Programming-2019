@@ -27,3 +27,7 @@ iter n f x = f $ iter (n-1) f x
 -- Tipe dari hasilnya adalah (Num b, Enum b) => b
 -- Efeknya adalah, iter n succ m akan melakukan fungsi succ m sebanyak n kali
 -- Misal iter 5 succ 10 akan menghasilkan 15
+
+-- (*) How would you define the sum of the squares of the natural numbers 1
+-- to n using map and foldr?
+sumSquares n = foldr (\x acc -> acc + x^2) 0 [1..n]
