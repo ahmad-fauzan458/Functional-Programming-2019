@@ -106,3 +106,5 @@ questionThree xs = map (+2) (filter (\x -> x > 3) xs)
 questionFour xys = map (\(x,y) -> x+3) xys
 
 questionFive xys = map (\(x,y) -> x+4) (filter (\(x,y) -> x+y < 5) xys) 
+
+questionSix mxs = map (\(Just x) -> x+5) mxs
