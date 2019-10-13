@@ -1,3 +1,5 @@
+import Data.List
+
 -- 1. Uraikan langkah evaluasi dari ekspresi berikut: [ x+y | x <- [1 .. 4], y <- [2 .. 4], x > y ]
 --
 -- Pertama tama, dari statement x <- [1..4], y <- [2..4]
@@ -18,3 +20,7 @@ divisor n = [x | x <-[1,2..n],  n `mod` x == 0]
 -- Buatlah definisi quick sort menggunakan list comprehension
 quicksort [] = []
 quicksort (x:xs) = quicksort([y | y <- xs, y <= x]) ++ [x] ++ quicksort([z | z <- xs, z > x])
+
+-- 4. Buatlah definisi infinite list untuk permutation.
+permutation [] = [[]]
+permutation xs = [ x:ps | x <- xs, ps <- permutation(xs\\[x])]
