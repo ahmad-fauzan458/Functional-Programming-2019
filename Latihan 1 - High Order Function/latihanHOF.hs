@@ -144,3 +144,14 @@ prop_ZipUnzip xys =
   zip xs ys == xys
  where
   (xs,ys) = unzip xys
+
+-- 4
+
+orderedList :: Gen [Integer]
+orderedList =
+  do x  <- arbitrary
+     ds <- arbitrary
+     return (make x ds)
+ where
+  make x []     = []
+  make x (d:ds) = x : make (x+abs d) ds
