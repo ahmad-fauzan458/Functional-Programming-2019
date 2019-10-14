@@ -138,3 +138,9 @@ pairsOfEqualLengthLists gen =
      xs <- listOfLength (abs n) gen
      ys <- listOfLength (abs n) gen
      return (xs,ys)
+
+prop_ZipUnzip :: [(Int,Int)] -> Bool
+prop_ZipUnzip xys =
+  zip xs ys == xys
+ where
+  (xs,ys) = unzip xys
