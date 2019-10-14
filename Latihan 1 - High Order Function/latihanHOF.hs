@@ -123,3 +123,11 @@ questionTwo' xs = [x | x <- xs, x > 7]
 questionThree' xs ys = [(x,y) | x<-xs, y<-ys]
 
 questionFour' xys = [ x+y | (x,y) <- xys, x+y > 3]
+
+
+-- 3
+-- * 3
+-- Generating Lists
+
+listOfLength :: Int -> Gen a -> Gen [a]
+listOfLength n gen = sequence [ gen | i <- [1..n] ]
