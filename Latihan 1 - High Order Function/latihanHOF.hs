@@ -131,3 +131,10 @@ questionFour' xys = [ x+y | (x,y) <- xys, x+y > 3]
 
 listOfLength :: Int -> Gen a -> Gen [a]
 listOfLength n gen = sequence [ gen | i <- [1..n] ]
+
+pairsOfEqualLengthLists :: Gen a -> Gen ([a],[a])
+pairsOfEqualLengthLists gen =
+  do n <- choose (0,100)
+     xs <- listOfLength (abs n) gen
+     ys <- listOfLength (abs n) gen
+     return (xs,ys)
