@@ -114,3 +114,6 @@ uses the following convention:
 
 > queryState  :: (RobotState -> a) -> Robot a
 > queryState  q = Robot (\s _ _ -> return (s, q s))
+
+> turnLeft  :: Robot ()
+> turnLeft = updateState (\s -> s {facing = left (facing s)})
