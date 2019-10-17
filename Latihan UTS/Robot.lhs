@@ -28,3 +28,14 @@ uses the following convention:
 >      turnRight
 >      moven 5
 
+< cond :: Robot Bool -> Robot a -> Robot a -> Robot a
+
+< evade :: Robot ()
+< evade = cond blocked
+<           (do turnRight
+<               move)
+<           move
+
+> evade :: Robot ()
+> evade = do cond1 blocked turnRight 
+>            move
