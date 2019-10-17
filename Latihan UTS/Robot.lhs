@@ -413,3 +413,8 @@ uses the following convention:
 >   b <- blocked
 >   turnLeft
 >   return b
+
+> turnAround :: Robot ()
+> turnAround = do
+>   turnRight
+>   turnRight
