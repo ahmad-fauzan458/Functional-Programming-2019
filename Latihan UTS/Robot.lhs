@@ -108,3 +108,6 @@ uses the following convention:
 
 > right d = toEnum (succ (fromEnum d) `mod` 4)
 > left  d = toEnum (pred (fromEnum d) `mod` 4)
+
+> updateState :: (RobotState -> RobotState) -> Robot ()
+> updateState u = Robot (\s _ _ -> return (u s, ()))
