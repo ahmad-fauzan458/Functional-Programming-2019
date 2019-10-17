@@ -443,3 +443,8 @@ uses the following convention:
 >     do move
 >        turnRight
 >        getGold
+
+> drawBackground w =
+>   drawInWindowNow w
+>       (withColor White
+>          (polygon [(0,0),(xWin,0),(xWin,yWin),(0,yWin)]))
