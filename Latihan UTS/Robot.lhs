@@ -430,3 +430,16 @@ uses the following convention:
 >   turnLeft
 >   moveToWall
 >   turnAround
+
+> getGold :: Robot ()
+> getGold = do
+>   getCoinsToWall
+>   turnLeft
+>   move
+>   turnLeft
+>   getCoinsToWall
+>   turnRight
+>   cond1 (isnt blocked) $
+>     do move
+>        turnRight
+>        getGold
