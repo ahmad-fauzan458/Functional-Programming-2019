@@ -465,3 +465,51 @@ uses the following convention:
 >        putStrLn ("  Pen Color: " ++ show (color s))
 >        putStrLn ("  Coins at:  " ++ show (treasure s))
 >        putStrLn ("  In Pocket: " ++ show (pocket s))
+
+> runRobot :: Robot () -> RobotState -> Grid -> IO ()
+> runRobot (Robot sf) s g
+>   = runGraphics $
+>     do w <- openWindowEx "Robot World" (Just (0,0)) 
+>               (Just (xWin,yWin)) drawBufferedGraphic
+>        drawGrid w g
+>        drawCoins w s
+>        -- spaceWait w
+>        sf s g w
+>        spaceClose w
+
+> runRobotBook :: Robot () -> RobotState -> Grid -> IO ()
+> runRobotBook (Robot sf) s g
+>   = runGraphics $
+>     do w <- openWindowEx "Robot World" (Just (0,0)) (Just (xWin,yWin))
+>               drawBufferedGraphic
+>        printState s
+>        -- drawBackground w
+>        drawGrid w g
+>        drawCoins w s
+>        -- spaceWait w
+>        -- getKey w
+>        -- GW.getEvent w
+>        (s',()) <- sf s g w
+>        -- getKey w
+>        printState s'
+>        -- spaceWait w
+>        spaceClose w
+
+> spiral :: Robot ()
+> spiral = penDown >> loop 1 
+>  where loop n =
+>          let twice = do turnRight
+>                         moven n
+>                         turnRight
+>                         moven n
+>          in cond blocked 
+>               (twice >> turnRight >> moven n)
+>               (twice >> loop (n+1))
+
+
+> main = runRobot (moven 5 >> turnRight >> moven 5 >> turnLeft >> moven 20  ) s0 g3
+> main0 = runRobot spiral s0 g3
+> main3 = runRobot spiral s0 g3
+> main3book = runRobotBook treasureHunt s0 g3
+> main4 = runRobot spiral s0 g4
+> main4book = runRobotBook treasureHunt s0 g4
