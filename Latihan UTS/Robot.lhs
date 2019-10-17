@@ -48,3 +48,6 @@ uses the following convention:
 > getCoinsToWall = while (isnt blocked) $
 >                    do move
 >                       pickCoin
+
+> moven :: Int -> Robot ()
+> moven n = mapM_ (const move) [1..n]
