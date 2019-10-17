@@ -103,3 +103,8 @@ uses the following convention:
 >                 let Robot sf1 = f a1
 >                 (s2,a2) <- sf1 s1 g w
 >                 return (s2,a2)
+
+> right,left :: Direction -> Direction
+
+> right d = toEnum (succ (fromEnum d) `mod` 4)
+> left  d = toEnum (pred (fromEnum d) `mod` 4)
