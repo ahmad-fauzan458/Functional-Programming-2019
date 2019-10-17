@@ -117,3 +117,6 @@ uses the following convention:
 
 > turnLeft  :: Robot ()
 > turnLeft = updateState (\s -> s {facing = left (facing s)})
+
+> turnRight :: Robot ()
+> turnRight = updateState (\s -> s {facing = right (facing s)})
