@@ -27,6 +27,9 @@ permutation xs = [ x:ps | x <- xs, ps <- permutation(xs\\[x])]
 
 -- 5. Buatlah definisi untuk memberikan infinite list dari bilangan prima menerapkan
 -- algoritma Sieve of Erastothenes.
+primes = sieve [2,3..]
+    where sieve (x:xs) = x : sieve [ y | y <- xs, y `mod` x /= 0]
+
 primes n = sieve [2,3..n]
     where sieve (x:xs) = x : sieve [ y | y <- xs, y `mod` x /= 0]
 
