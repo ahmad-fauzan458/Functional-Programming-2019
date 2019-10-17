@@ -422,3 +422,11 @@ uses the following convention:
 >   cond1 blockedRight $
 >     do move
 >        wallFollowRight
+
+> enterRoom :: Robot ()
+> enterRoom = do
+>   turnRight
+>   move
+>   turnLeft
+>   moveToWall
+>   turnAround
