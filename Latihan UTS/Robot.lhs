@@ -123,3 +123,6 @@ uses the following convention:
 
 > turnTo    :: Direction -> Robot ()
 > turnTo d = updateState (\s -> s {facing = d})
+
+> direction :: Robot Direction
+> direction = queryState facing
