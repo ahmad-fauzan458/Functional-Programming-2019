@@ -152,3 +152,6 @@ uses the following convention:
 
 > penDown :: Robot ()
 > penDown = updateState (\s -> s {pen = True})
+
+> setPenColor  :: Color -> Robot ()
+> setPenColor c = updateState (\s -> s {color = c})
