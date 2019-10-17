@@ -72,3 +72,34 @@ uses the following convention:
 >                 , treasure = tr
 >                 , pocket   = 0
 >                 }
+
+> type Position = (Int,Int)
+
+> data Direction = North | East | South | West
+>      deriving (Eq,Show,Enum)
+
+< type Robot1 a = RobotState -> Grid -> (RobotState, a)
+
+< type Robot2 a = RobotState -> Grid -> Window -> (RobotState, a, IO ())
+
+< type Robot3 a = RobotState -> Grid -> Window -> IO (RobotState, a)
+
+> newtype Robot a 
+>   = Robot (RobotState -> Grid -> Window -> IO (RobotState, a))
+
+> instance Functor Robot where
+>    fmap = liftM
+
+> instance Applicative Robot where
+>    pure  = return
+>    (<*>) = ap 
+
+> instance Monad Robot where
+>   return a 
+>     = Robot (\s _ _ -> return (s,a))
+>   Robot sf0 >>= f
+>     = Robot $ \s0 g w -> do
+>                 (s1,a1) <- sf0 s0 g w
+>                 let Robot sf1 = f a1
+>                 (s2,a2) <- sf1 s1 g w
+>                 return (s2,a2)
