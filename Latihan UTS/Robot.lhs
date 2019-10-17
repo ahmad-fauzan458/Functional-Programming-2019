@@ -406,3 +406,10 @@ uses the following convention:
 >   move
 >   turnAround
 >   return b
+
+> blockedRight :: Robot Bool
+> blockedRight = do
+>   turnRight
+>   b <- blocked
+>   turnLeft
+>   return b
