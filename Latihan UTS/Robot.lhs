@@ -111,3 +111,6 @@ uses the following convention:
 
 > updateState :: (RobotState -> RobotState) -> Robot ()
 > updateState u = Robot (\s _ _ -> return (u s, ()))
+
+> queryState  :: (RobotState -> a) -> Robot a
+> queryState  q = Robot (\s _ _ -> return (s, q s))
