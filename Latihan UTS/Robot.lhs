@@ -348,3 +348,25 @@ uses the following convention:
 > eraseCoin w p = let (x,y) = trans p
 >                 in drawInWindowNow w 
 >                      (withColor Black (ellipse (x-d,y-d) (x+d,y-(3*d))))
+
+> graphicsMove :: Window -> RobotState -> Position -> IO ()
+> graphicsMove w s newPos
+>   = do if pen s then drawLine w (color s) (trans (position s)) 
+>                                           (trans newPos)
+>                 else return ()
+
+> trans :: Position -> Point
+> trans (x,y) = (div xWin 2 + 2*d*x, div yWin 2 - 2*d*y)
+
+> spaceWait :: Window -> IO ()
+> spaceWait w
+>   = do k <- getKey w
+>        if k==' ' then return ()
+>                  else spaceWait w
+
+> tr :: [Position]
+> tr = [(x,y) | x <- [-13,-11 .. 1], y <- [9,11 .. 15]]
+
+| cond p (c1 >> c) (c2 >> c)  ===>  cond p c1 c2 >> c
+| repeat p c  ===>  c >> while p c
+| turnTo d >> direction  ===>  return d
