@@ -155,3 +155,22 @@ uses the following convention:
 
 > setPenColor  :: Color -> Robot ()
 > setPenColor c = updateState (\s -> s {color = c})
+
+> coins     :: Robot Int
+> coins  = queryState pocket
+
+> pickCoin  :: Robot ()
+> pickCoin = cond1 onCoin
+>              (Robot $ \s _ w -> 
+>                 do eraseCoin w (position s)
+>                    return (s {treasure = position s `delete` treasure s, 
+>                               pocket   = pocket s + 1}, ()              )
+>              )
+
+> dropCoin  :: Robot ()
+> dropCoin = cond1 (coins >* return 0)
+>              (Robot $ \s _ w -> 
+>                 do drawCoin w (position s)
+>                    return (s {treasure = position s : treasure s,
+>                               pocket   = pocket s - 1}, ()       )
+>              )
