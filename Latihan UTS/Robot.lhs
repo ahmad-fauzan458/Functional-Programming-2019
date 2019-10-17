@@ -416,3 +416,9 @@ uses the following convention:
 
 > turnAround :: Robot ()
 > turnAround = updateState (\s -> s {facing = right (right (facing s))})
+
+> wallFollowRight :: Robot ()
+> wallFollowRight =
+>   cond1 blockedRight $
+>     do move
+>        wallFollowRight
