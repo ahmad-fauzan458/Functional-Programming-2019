@@ -174,3 +174,38 @@ uses the following convention:
 >                    return (s {treasure = position s : treasure s,
 >                               pocket   = pocket s - 1}, ()       )
 >              )
+
+< liftM    :: (Monad m) => (a -> b) -> (m a -> m b)
+< liftM f  =  \a -> do a' <- a
+<                      return (f a')
+
+< liftM2   :: (Monad m) => (a -> b -> c) -> (m a -> m b -> m c)
+< liftM2 f =  \a b -> do a' <- a
+<                        b' <- b
+<                        return (f a' b')
+
+> cond      :: Robot Bool -> Robot a -> Robot a -> Robot a
+> cond p c a = do pred <- p
+>                 if pred then c else a
+
+> cond1 p c = cond p c (return ())
+
+> while     :: Robot Bool -> Robot () -> Robot ()
+> while p b = cond1 p (b >> while p b)
+
+> (||*)     :: Robot Bool -> Robot Bool -> Robot Bool
+> b1 ||* b2 = do p <- b1
+>                if p then return True
+>                     else b2
+
+> (&&*)     :: Robot Bool -> Robot Bool -> Robot Bool
+> b1 &&* b2 = do p <- b1
+>                if p then b2
+>                     else return False
+
+> isnt :: Robot Bool -> Robot Bool
+> isnt = liftM not
+
+> (>*),(<*) :: Robot Int -> Robot Int -> Robot Bool
+> (>*) = liftM2 (>)
+> (<*) = liftM2 (<)
