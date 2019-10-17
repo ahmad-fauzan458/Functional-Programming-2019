@@ -209,3 +209,53 @@ uses the following convention:
 > (>*),(<*) :: Robot Int -> Robot Int -> Robot Bool
 > (>*) = liftM2 (>)
 > (<*) = liftM2 (<)
+
+< array :: Ix a => (a,a) -> [(a,b)] -> Array a b
+
+< colors :: Array Int Color
+< colors = array (0,7) [(0,Black), (1,Blue), (2,Green), (3,Cyan)
+<                    (4,Red), (5,Magenta), (6,Yellow), (7,White)]
+
+< data Color = Black | Blue | Green | Cyan
+<            | Red | Magenta | Yellow | White
+<      deriving (Eq, Ord, Bounded, Enum, Ix, Show, Read)
+
+> colors :: Array Int Color
+> colors = array (0,7) (zip [0..7] [Black .. White])
+
+> type Grid = Array Position [Direction]
+
+< at :: Grid -> Position -> [Direction]
+< at = (!)
+
+> at :: Grid -> Position -> [Direction]
+> at = (!)
+
+> size :: Int
+> size = 20
+
+> interior = [North, South, East, West]
+
+> nb  = [South, East, West]
+> sb  = [North, East, West]
+> eb  = [North, South, West]
+> wb  = [North, South, East]
+> nwc = [South, East]
+> nec = [South, West]
+> swc = [North, East]
+> sec = [North, West]
+
+> g0 :: Grid
+> g0 = array ((-size,-size),(size,size))
+>        ([ ((i, size),nb)   | i <- r ] ++
+>         [ ((i,-size),sb)   | i <- r ] ++
+>         [ (( size,i),eb)   | i <- r ] ++
+>         [ ((-size,i),wb)   | i <- r ] ++
+>         [ ((i,j),interior) | i <- r, j <- r ] ++
+>         [ ((size,size), nec),((size,-size), sec),
+>           ((-size,size),nwc),((-size,-size),swc)] )
+>      where r = [1-size .. size-1]
+
+< (//) :: Ix a => Array a b -> [(a,b)] -> Array a b
+
+| colors // [(0,White) (7,Black)]
