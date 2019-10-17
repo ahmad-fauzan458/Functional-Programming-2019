@@ -448,3 +448,10 @@ uses the following convention:
 >   drawInWindowNow w
 >       (withColor White
 >          (polygon [(0,0),(xWin,0),(xWin,yWin),(0,yWin)]))
+
+> spaceClose :: Window -> IO ()
+> spaceClose w
+>   = do k <- getKey w
+>        if k==' ' || k == '\x0'
+>           then closeWindow w
+>   
