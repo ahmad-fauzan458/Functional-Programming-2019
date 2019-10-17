@@ -51,3 +51,24 @@ uses the following convention:
 
 > moven :: Int -> Robot ()
 > moven n = mapM_ (const move) [1..n]
+
+> data RobotState 
+>   = RobotState 
+>         { position  :: Position
+>         , facing    :: Direction
+>         , pen       :: Bool 
+>         , color     :: Color
+>         , treasure  :: [Position]
+>         , pocket    :: Int
+>         }
+>      deriving Show
+
+
+> s0 :: RobotState
+> s0 = RobotState { position = (0,0)
+>                 , pen      = True
+>                 , color    = Cyan
+>                 , facing   = North
+>                 , treasure = tr
+>                 , pocket   = 0
+>                 }
