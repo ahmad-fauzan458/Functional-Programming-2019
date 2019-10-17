@@ -146,3 +146,6 @@ uses the following convention:
 >       South -> (x,y-1)
 >       East  -> (x+1,y)
 >       West  -> (x-1,y)
+
+> penUp :: Robot ()
+> penUp = updateState (\s -> s {pen = False})
