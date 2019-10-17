@@ -259,3 +259,92 @@ uses the following convention:
 < (//) :: Ix a => Array a b -> [(a,b)] -> Array a b
 
 | colors // [(0,White) (7,Black)]
+
+> mkHorWall, mkVerWall :: Int -> Int -> Int -> [(Position,[Direction])]
+
+> mkHorWall x1 x2 y
+>   = [ ((x,y),  nb) | x <- [x1..x2] ] ++
+>     [ ((x,y+1),sb) | x <- [x1..x2] ]
+
+> mkVerWall y1 y2 x
+>   = [ ((x,y),  eb) | y <- [y1..y2] ] ++
+>     [ ((x+1,y),wb) | y <- [y1..y2] ]
+
+> g1 :: Grid
+> g1 = g0 // mkHorWall (-5) 5 10
+
+> mkBox :: Position -> Position -> [(Position,[Direction])]
+> mkBox (x1,y1) (x2,y2)
+>   = mkHorWall (x1+1) x2 y1 ++
+>     mkHorWall (x1+1) x2 y2 ++
+>     mkVerWall (y1+1) y2 x1 ++
+>     mkVerWall (y1+1) y2 x2
+
+< accum :: (Ix a) => (b->c->b) -> Array a b -> [(a,c)] -> Array a b
+
+| [South, East, West] `intersect` [North, South, West]
+| ===> [South, West]
+
+> g2 :: Grid
+> g2 = accum intersect g0 (mkBox (-15,8) (2,17))
+
+> g3 :: Grid
+> g3 = accum union g2 [((-11,8),interior),((-11,9),interior)]
+
+> g4 :: Grid
+> g4 = accum union g2 [((-7,17),interior),((-7,18),interior)]
+
+> drawLine :: Window -> Color -> Point -> Point -> IO ()
+> drawLine w c p1 p2
+>   = drawInWindowNow w (withColor c (line p1 p2))
+
+> d :: Int
+> d = 5       -- half the distance between grid points
+
+> wc, cc :: Color
+> wc = Green  -- color of walls
+> cc = Yellow -- color of coins
+
+> xWin, yWin :: Int
+> xWin = 500
+> yWin = 500
+
+> pause n =
+>   do t0 <- timeGetTime
+>      let loop = do t1 <- timeGetTime
+>                    if (t1-t0) < n
+>                       then loop
+>                       else return ()
+>      loop
+
+> drawGrid :: Window -> Grid -> IO ()
+> drawGrid w wld
+>   = let (low@(xMin,yMin),hi@(xMax,yMax)) = bounds wld
+>         (x1,y1) = trans low
+>         (x2,y2) = trans hi
+>     in do drawLine w wc (x1-d,y1+d) (x1-d,y2-d)
+>           drawLine w wc (x1-d,y1+d) (x2+d,y1+d)
+>           sequence_ [drawPos w (trans (x,y)) (wld `at` (x,y)) 
+>                     | x <- [xMin..xMax], y <- [yMin..yMax]]
+
+> drawPos :: Window -> Point -> [Direction] -> IO ()
+> drawPos w (x,y) ds
+>   = do if North `notElem` ds
+>           then drawLine w wc (x-d,y-d) (x+d,y-d)
+>           else return ()
+>        if East `notElem` ds
+>           then drawLine w wc (x+d,y-d) (x+d,y+d)
+>           else return ()
+
+> drawCoins :: Window -> RobotState -> IO ()
+> drawCoins w s = mapM_ (drawCoin w) (treasure s)
+
+> drawCoin :: Window -> Position -> IO ()
+> drawCoin w p = let (x,y) = trans p
+>                in drawInWindowNow w 
+>                    (withColor cc (ellipse (x-5-1,y-d+1) (x+d+1,y-(3*d)+1)))
+
+> eraseCoin :: Window -> Position -> IO ()
+> eraseCoin w p = let (x,y) = trans p
+>                 in drawInWindowNow w 
+>                      (withColor Black (ellipse (x-d,y-d) (x+d,y-(3*d))))
