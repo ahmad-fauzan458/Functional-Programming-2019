@@ -149,3 +149,6 @@ uses the following convention:
 
 > penUp :: Robot ()
 > penUp = updateState (\s -> s {pen = False})
+
+> penDown :: Robot ()
+> penDown = updateState (\s -> s {pen = True})
