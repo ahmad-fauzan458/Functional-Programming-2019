@@ -43,3 +43,8 @@ uses the following convention:
 > moveToWall :: Robot ()
 > moveToWall = while (isnt blocked)
 >                move
+
+> getCoinsToWall :: Robot ()
+> getCoinsToWall = while (isnt blocked) $
+>                    do move
+>                       pickCoin
