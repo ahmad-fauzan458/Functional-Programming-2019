@@ -120,3 +120,6 @@ uses the following convention:
 
 > turnRight :: Robot ()
 > turnRight = updateState (\s -> s {facing = right (facing s)})
+
+> turnTo    :: Direction -> Robot ()
+> turnTo d = updateState (\s -> s {facing = d})
