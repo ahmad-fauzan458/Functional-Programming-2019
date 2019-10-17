@@ -383,3 +383,17 @@ uses the following convention:
 >                   do turnRight
 >                      moven n
 >                      loop (n+1)
+
+> findDoor :: Robot ()
+> findDoor = do 
+>   setPenColor Magenta
+>   turnLeft
+>   loop
+>    where loop = do
+>            wallFollowRight
+>            cond doorOnRight
+>              (do enterRoom
+>                  getGold)
+>              (do turnRight
+>                  move
+>                  loop)
