@@ -130,3 +130,11 @@ uses the following convention:
 > blocked   :: Robot Bool
 > blocked = Robot $ \s g _ -> 
 >             return (s, facing s `notElem` (g `at` position s))
+
+> move      :: Robot ()
+> move = cond1 (isnt blocked)
+>          (Robot $ \s _ w -> do
+>             let newPos = movePos (position s) (facing s)
+>             graphicsMove w s newPos
+>             return (s {position = newPos}, ())
+>          )
