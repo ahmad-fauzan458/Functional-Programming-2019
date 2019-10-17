@@ -415,6 +415,4 @@ uses the following convention:
 >   return b
 
 > turnAround :: Robot ()
-> turnAround = do
->   turnRight
->   turnRight
+> turnAround = updateState (\s -> s {facing = right (right (facing s))})
