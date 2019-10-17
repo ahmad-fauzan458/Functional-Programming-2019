@@ -370,3 +370,16 @@ uses the following convention:
 | cond p (c1 >> c) (c2 >> c)  ===>  cond p c1 c2 >> c
 | repeat p c  ===>  c >> while p c
 | turnTo d >> direction  ===>  return d
+
+> treasureHunt :: Robot ()
+> treasureHunt = do
+>   penDown 
+>   loop 1
+>    where loop n =
+>            cond blocked findDoor $
+>              do turnRight
+>                 moven n
+>                 cond blocked findDoor $
+>                   do turnRight
+>                      moven n
+>                      loop (n+1)
