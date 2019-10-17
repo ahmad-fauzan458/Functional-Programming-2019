@@ -397,3 +397,12 @@ uses the following convention:
 >              (do turnRight
 >                  move
 >                  loop)
+
+> doorOnRight :: Robot Bool
+> doorOnRight = do
+>   move
+>   b <- blockedRight
+>   turnAround
+>   move
+>   turnAround
+>   return b
