@@ -39,3 +39,7 @@ uses the following convention:
 > evade :: Robot ()
 > evade = do cond1 blocked turnRight 
 >            move
+
+> moveToWall :: Robot ()
+> moveToWall = while (isnt blocked)
+>                move
