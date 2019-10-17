@@ -454,4 +454,14 @@ uses the following convention:
 >   = do k <- getKey w
 >        if k==' ' || k == '\x0'
 >           then closeWindow w
->   
+>
+
+> printState :: RobotState -> IO ()
+> printState s
+>   = do putStrLn "Robot State:"
+>        putStrLn ("  Position:  " ++ show (position s))
+>        putStrLn ("  Facing:    " ++ show (facing s))
+>        putStrLn ("  Pen Down:  " ++ show (pen s))
+>        putStrLn ("  Pen Color: " ++ show (color s))
+>        putStrLn ("  Coins at:  " ++ show (treasure s))
+>        putStrLn ("  In Pocket: " ++ show (pocket s))
