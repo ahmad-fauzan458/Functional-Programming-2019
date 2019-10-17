@@ -126,3 +126,7 @@ uses the following convention:
 
 > direction :: Robot Direction
 > direction = queryState facing
+
+> blocked   :: Robot Bool
+> blocked = Robot $ \s g _ -> 
+>             return (s, facing s `notElem` (g `at` position s))
