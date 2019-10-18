@@ -91,3 +91,6 @@
 
 < data InternalTree a = ILeaf 
 <                     | IBranch a (InternalTree a) (InternalTree a)
+
+< takeTree      :: Int -> InternalTree a -> InternalTree a
+< takeTreeWhile :: (a -> Bool) -> InternalTree a -> InternalTree a
