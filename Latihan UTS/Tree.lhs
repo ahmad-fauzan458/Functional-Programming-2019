@@ -88,3 +88,6 @@
 > evaluate (e1 :/ e2)    = evaluate e1 / evaluate e2
 > evaluate (Let v e0 e1) = evaluate (subst v e0 e1)
 > evaluate (V v)         = 0.0   
+
+< data InternalTree a = ILeaf 
+<                     | IBranch a (InternalTree a) (InternalTree a)
