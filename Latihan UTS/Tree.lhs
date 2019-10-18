@@ -64,6 +64,7 @@
 >           | Let String Expr Expr
 >           | Expr `:div` Expr     
 >           | Expr `:mod` Expr
+>           | Expr :^ Expr
 >      deriving Show
 
 
@@ -82,6 +83,7 @@
 > subst v0 e0 (Let v1 e1 e2) = Let v1 e1 (subst v0 e0 e2)
 > subst v0 e0 (e1 `:div` e2) = subst v0 e0 e1 `:div` subst v0 e0 e2
 > subst v0 e0 (e1 `:mod` e2)     = subst v0 e0 e1 `:mod` subst v0 e0 e2
+> subst v0 e0 (e1 :^ e2)     = subst v0 e0 e1 :^ subst v0 e0 e2
 
 > evaluate :: Expr -> Float
 
@@ -94,6 +96,7 @@
 > evaluate (V v)         = 0.0   
 > evaluate (e1 `:div` e2)= evaluate e1 `div` evaluate e2
 > evaluate (e1 `:mod` e2)    = evaluate e1 `mod` evaluate e2
+> evaluate (e1 :^ e2)    = evaluate e1 ^ evaluate e2
 
 < data InternalTree a = ILeaf 
 <                     | IBranch a (InternalTree a) (InternalTree a)
