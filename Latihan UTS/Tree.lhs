@@ -94,3 +94,33 @@
 
 < takeTree      :: Int -> InternalTree a -> InternalTree a
 < takeTreeWhile :: (a -> Bool) -> InternalTree a -> InternalTree a
+
+-- >>> exp0 = (((C 5.0) :+ (C 7) :* (C 4)))
+-- >>> exp0
+-- (C 5.0 :+ C 7.0) :* C 4.0
+--
+
+
+-- >>> evaluate exp0
+-- 48.0
+--
+
+
+-- >>> evaluate (((C 5) :+ (C 7) :* (C 4)))
+-- 48.0
+--
+-- >>> exp1 = Let "x" (C 7) ((C 5) :+ (C 7) :* (V "x"))
+-- >>> exp1
+-- >>> evaluate exp1
+-- Let "x" (C 7.0) ((C 5.0 :+ C 7.0) :* V "x")
+-- 19.0
+--
+
+-- >>> evaluate exp1
+-- 19.0
+--
+
+
+-- >>> evaluate (Let "x" (C 5) (V "x" :+ (C 7)))
+-- 12.0
+--
