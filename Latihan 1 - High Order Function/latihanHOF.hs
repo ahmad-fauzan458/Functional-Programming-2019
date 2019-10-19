@@ -85,6 +85,16 @@ composeList (x:xs) = x . composeList xs
 flip' :: (a -> b -> c) -> (b -> a -> c)
 flip' f = (\x y -> f y x)
 
+-- Additional practice from Trees.lhs that using flip
+
+simple n a b = n * (a-b)
+-- simple 5 2 3 = -5
+
+newSimple = flip' simple
+-- newSimple 5 2 3 = 4
+
+newSimple2 n = flip' (simple n)
+
 -- 2 (*). List Comprehensions and Higher-Order Functions
 
 -- Can you rewrite the following list comprehensions using the higher-order
