@@ -78,3 +78,12 @@ maximum' = foldr1 (\x acc -> if x > acc then x else acc)
 -- Example foldl1
 last' :: [a] -> a  
 last' = foldl1 (\_ x -> x) 
+
+-- scanl and scanr are like foldl and foldr, only they report all the 
+-- intermediate accumulator states in the form of a list. There are also
+-- scanl1 and scanr1, which are analogous to foldl1 and foldr1.
+
+exampleScanl =  scanl (+) 0 [3,5,2,1]  
+-- exampleScanl = [0,3,8,10,11]  
+exampleScanr = scanr (+) 0 [3,5,2,1]  
+-- exampleScanr =[11,8,3,1,0]  
