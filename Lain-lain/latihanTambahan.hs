@@ -62,3 +62,19 @@ sqrtSum = sum (map sqrt [1..130])
 
 -- Exampe with $ function
 sqrtSum' = sum $ map sqrt [1..130]
+
+-- The foldl1 and foldr1 functions work much like foldl and foldr, 
+-- only you don't need to provide them with an explicit starting value. 
+-- They assume the first (or last) element of the list to be the starting 
+-- value and then start the fold with the element next to it. With that in 
+-- mind, the sum function can be implemented like so: sum = foldl1 (+). 
+-- Because they depend on the lists they fold up having at least one element,
+-- they cause runtime errors if called with empty lists
+
+-- Example foldr1
+maximum' :: (Ord a) => [a] -> a  
+maximum' = foldr1 (\x acc -> if x > acc then x else acc)
+
+-- Example foldl1
+last' :: [a] -> a  
+last' = foldl1 (\_ x -> x) 
