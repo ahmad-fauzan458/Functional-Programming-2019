@@ -53,3 +53,12 @@ primes = sieve [2,3..100] where
     sieve (x:xs) = x : sieve [y | y <- xs, y `mod` x > 0]
 
 trip = [(x,y,z) |  z <- [5..], y <- [4..z], x <- [3..y], x^2+y^2 == z^2]
+
+-- ($) :: (a -> b) -> a -> b  
+-- f $ x = f x 
+
+-- Example without $ function
+sqrtSum = sum (map sqrt [1..130])
+
+-- Exampe with $ function
+sqrtSum' = sum $ map sqrt [1..130]
