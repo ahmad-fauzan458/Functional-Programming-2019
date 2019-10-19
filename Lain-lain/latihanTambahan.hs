@@ -87,3 +87,8 @@ exampleScanl =  scanl (+) 0 [3,5,2,1]
 -- exampleScanl = [0,3,8,10,11]  
 exampleScanr = scanr (+) 0 [3,5,2,1]  
 -- exampleScanr =[11,8,3,1,0]  
+
+adds (x:xs) (y:ys) = x+y : adds xs ys
+adds [] [] = []
+
+fibs = 1 : 1 : adds fibs (tail fibs)
