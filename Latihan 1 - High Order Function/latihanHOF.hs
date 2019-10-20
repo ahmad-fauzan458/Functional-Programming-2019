@@ -133,35 +133,3 @@ questionTwo' xs = [x | x <- xs, x > 7]
 questionThree' xs ys = [(x,y) | x<-xs, y<-ys]
 
 questionFour' xys = [ x+y | (x,y) <- xys, x+y > 3]
-
-
--- 3
--- * 3
--- Generating Lists
-
-listOfLength :: Int -> Gen a -> Gen [a]
-listOfLength n gen = sequence [ gen | i <- [1..n] ]
-
-pairsOfEqualLengthLists :: Gen a -> Gen ([a],[a])
-pairsOfEqualLengthLists gen =
-  do n <- choose (0,100)
-     xs <- listOfLength (abs n) gen
-     ys <- listOfLength (abs n) gen
-     return (xs,ys)
-
-prop_ZipUnzip :: [(Int,Int)] -> Bool
-prop_ZipUnzip xys =
-  zip xs ys == xys
- where
-  (xs,ys) = unzip xys
-
--- 4
-
-orderedList :: Gen [Integer]
-orderedList =
-  do x  <- arbitrary
-     ds <- arbitrary
-     return (make x ds)
- where
-  make x []     = []
-  make x (d:ds) = x : make (x+abs d) ds
